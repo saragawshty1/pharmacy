@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Category>
+@{
+    <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centered Card</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+</head>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center" style="width: 100%;">
+                        <div class="card-header" style="background-color: gray; color: white;">
+                            <img src="~/images/Category/@item.IconUrl" alt="Logo" class="rounded-circle" width="50px" height="50px" style="margin: 10px;" />
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: maroon;">@item.CategoryName</h5>
+                            
+                                <a href="/Patient/Category/ProductPerCategory/@item.CategoryId" class="btn btn-outline-danger">Show Products</a>
+                        </div>
+                        <div class="card-footer  text-muted" style="background-color:gray; color: white;">
+                          
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+}

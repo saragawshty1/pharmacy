@@ -1,8 +1,137 @@
-﻿@{
+﻿@model IEnumerable<Category>
+
+@{
     ViewData["Title"] = "Home Page";
 }
+<header>
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+         .icon-container {
+             text-align: center;
+             margin: 20px;
+         }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+         .icon-circle {
+             border-radius: 50%;
+             background-color: #d9534f;
+             color: white;
+             width: 60px;
+             height: 60px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             margin: 0 auto;
+         }
+
+         .icon-container p {
+             margin-top: 10px;
+             font-weight: bold;
+         }
+
+        .section-header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .section-line {
+            width: 100%;
+            height: 2px;
+            background-color: #d9534f;
+            margin: 0 auto;
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+     @* --------------------------------------------------------------------------------- *@
+</header>
+<div class="image-card">
+    <div class="text-content">
+        <h2>Skincare and Medicine You Can Trust!</h2>
+        <p>Experience the magic of  skincare, your skin's best friend for healthy glowing days ahead.</p>
+        
+    </div>
+    <div class="image-content">
+        <img src="~/images/home.jpg"  width="70px" alt="Skincare Products">
+    </div>
 </div>
+@* ---------------------------------------------------------------------------------------------- *@
+<br />
+<div class="container">
+    <!-- Centered Section with a Red Line -->
+    <div class="row">
+        <div class="col-12">
+            <h2 class="section-header">SHOP OUR POPULAR CATEGORIES</h2>
+            <div class="section-line"></div>
+        </div>
+    </div>
+</div>
+
+@* ------------------------------------------------------------------- *@
+<br />
+
+<div class="container">
+    <div class="row text-center">
+        @foreach (var item in Model.Take(6))
+
+        {
+            <div class="col-12 col-md-2">
+                <!-- Use appropriate column size based on layout -->
+                <div class="icon-circle">
+                    <a href="/Patient/Category/ProductPerCategory/@item.CategoryId">
+                      <img src="~/images/Category/@item.IconUrl" alt="Logo" class="rounded-circle" width="50px" height="50px" style="margin: 10px;" />
+                    </a>
+
+                 </div>
+                <p>@item.CategoryName</p>
+            </div>
+        }
+    </div>
+</div>
+
+
+       @*  <!--diabetes Icon -->
+        <div class="col-2 icon-container">
+            <div class="icon-circle">
+                <i class="fas fa-hand-holding"></i> <!-- Replace with relevant icon -->
+            </div>
+            <p>Diabetes</p>
+        </div>
+
+        <!-- Personal Care Icon -->
+        <div class="col-2 icon-container">
+            <div class="icon-circle">
+                <i class="fas fa-heart"></i> <!-- Replace with relevant icon -->
+            </div>
+            <p>Skin Care</p>
+        </div>
+
+        <!-- cvs hypertension Icon -->
+        <div class="col-2 icon-container">
+            <div class="icon-circle">
+                <i class="fas fa-bottle-water"></i> <!-- Replace with relevant icon -->
+            </div>
+            <p>cvs hypertension</p>
+        </div>
+
+        <!-- cvs anticoagulant Icon -->
+        <div class="col-2 icon-container">
+            <div class="icon-circle">
+                <i class="fas fa-leaf"></i> <!-- Replace with relevant icon -->
+            </div>
+            <p>cvs anticoagulant</p>
+        </div> *@
+    </div>
+    
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+ 
+ 
