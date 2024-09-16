@@ -1,0 +1,138 @@
+﻿@model IEnumerable<Product>
+
+
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .product-detail-container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .product-image-section {
+        width: 40%;
+        position: relative;
+    }
+
+    .featured-label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #e74c3c;
+        color: white;
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 3px;
+    }
+
+    .main-product-image {
+        width: 100%;
+        height: auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .product-info-section {
+        width: 60%;
+    }
+
+    .product-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .product-stock-status {
+        color: green;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .product-price {
+        font-size: 28px;
+        color: #ff0000;
+        margin-bottom: 20px;
+    }
+
+    .quantity-selector {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 20px;
+    }
+
+    .qty-btn {
+        width: 30px;
+        height: 30px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .qty-input {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #ccc;
+        height: 30px;
+    }
+
+    .add-to-bag-btn, .buy-now-btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .add-to-bag-btn {
+        background-color: #cc0000;
+        color: white;
+    }
+
+        .add-to-bag-btn:hover {
+            background-color: #b30000;
+        }
+
+    .buy-now-btn {
+        background-color: transparent;
+        color: #cc0000;
+        border: 2px solid #cc0000;
+    }
+
+        .buy-now-btn:hover {
+            background-color: #ffcccc;
+        }
+
+    </style>
+    @foreach(var item in Model)
+    {
+<div class="product-detail-container">
+    <div class="product-image-section">
+        <div class="featured-label">FEATURED</div>
+            <img src="~/Images/Products/@item.imgurl" alt="Product" class="main-product-image">
+    </div>
+    <div class="product-info-section">
+        <h1 class="product-title">@item.ProductName</h1>
+        <p class="product-stock-status">In stock</p>
+        <p>@item.Description</p>
+        <p class="product-price">EGP @item.Price</p>
+
+
+
+            <a href="@Url.Action("Index", "ShoppingCart", new { ProductId = item.ProductId })" class="add-to-bag-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                    <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                </svg>
+                ADD TO BAG
+            </a>
+
+       @*  <button class="buy-now-btn">BUY NOW</button> *@
+    </div>
+</div>
+}

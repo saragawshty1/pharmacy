@@ -28,8 +28,4 @@
     <ProjectReference Include="C:\Users\Masria\source\repos\Utility\Utility.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Doctor\Controllers\" />
-  </ItemGroup>
-
 </Project>

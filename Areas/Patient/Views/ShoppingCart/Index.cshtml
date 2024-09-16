@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ShoppingCart>
+
+@{<header> 
+    <link rel="stylesheet" href="~/css/cart.css" asp-append-version="true" />
+    </header>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-8 cart">
+
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                      
+                    </div>
+                </div>
+                @foreach(var item in Model)
+                {
+                <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+                            <div class="col-2"><img class="img-fluid" src="~/Images/Products/@item.Product.imgurl"></div>
+                        <div class="col">
+                            <div class="row text-muted">@item.Product.ProductName</div>
+                           
+                        </div>
+                        <div class="col">
+                                <a href="/Patient/ShoppingCart/Decreamnt/@item.Id">-</a><a href="#" class="border">@item.Count</a><a href="/Patient/ShoppingCart/Increment/@item.Id">+</a>
+                        </div>
+                            <div class="col">@item.Product.Price<span class="close">&#10005;</span></div>
+                            <div class="col-3 col-sm-4 col-lg-2 offset-lg-1 text-right pt-2">
+
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger bg-gradient py-2 ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                    </svg>
+                                </a>
+                                
+                            </div>
+                    </div>
+                </div>
+                }
+                
+                         
+               
+                
+                <div class="back-to-shop"><a href="/Patient/Home/Index">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            </div>
+            <div class="col-md-4 summary">
+                <div><h5><b>Summary</b></h5></div>
+                <hr>
+                <div class="row"> 
+                    <div class="col text-right">EGP @ViewBag.total</div>
+                </div>
+                
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">TOTAL PRICE</div>
+                    <div class="col text-right">EGP @ViewBag.total</div>
+                </div>
+                <a asp-action="Pay" asp-controller="ShopingCart"> <button class="btn btn-success bg-gradient py-2 ">  CHECKOUT  </button></a>
+            </div>
+        </div>
+
+    </div>
+}

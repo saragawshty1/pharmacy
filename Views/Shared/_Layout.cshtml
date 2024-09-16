@@ -3,38 +3,117 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - pharmacy</title>
+    <title>@ViewData["Title"] - Pharmacy</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/pharmacy.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            background-color: #800000; /* Maroon background */
+        }
+
+        .navbar-brand {
+            color: #ffffff !important;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+            .navbar-brand:hover {
+                color: #e6e6e6 !important;
+            }
+
+        .navbar-nav .nav-link {
+            color: #ffffff !important;
+            font-size: 1rem;
+            padding: 10px 15px;
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: #e6e6e6 !important;
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+        .navbar-toggler-icon {
+            background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23ffffff" viewBox="0 0 16 16"><path d="M2 4h12v1H2V4zm0 3h12v1H2V7zm0 3h12v1H2v-1z"/></svg>');
+        }
+
+        .form-control {
+            border-radius: 25px;
+            padding-left: 20px;
+        }
+
+        .btn-search {
+            background-color: #ffffff;
+            border-radius: 25px;
+            color: #800000;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+        }
+
+            .btn-search:hover {
+                background-color: #f2f2f2;
+            }
+
+        .container {
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #800000;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+            .footer a {
+                color: #ffffff;
+                text-decoration: none;
+            }
+
+                .footer a:hover {
+                    text-decoration: underline;
+                }
+    </style>
 </head>
 <body>
     <header>
-      
-        <nav class="navbar navbar-dark navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 justify-content-between" style="background-color: maroon;">
-    <!-- Navbar content -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a href="@Url.Action("Index", "Home")">
-                    <img src="~/images/logo.jpg" alt="Logo" class="rounded-circle" width="50px" height="50px" style="margin: 10px;" />
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="~/images/logo.jpg" alt="Logo" class="rounded-circle" width="50" height="50" />
+                    Pharmacy
                 </a>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pharmacy</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Patient" asp-controller="Category" asp-action="Index">Shop by Category</a>
                         </li>
-                         
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Patient" asp-action="Index" asp-controller="ShoppingCart">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                                    <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                                </svg>
+                                
+                            </a>
+                        </li>
                     </ul>
-                    <form class="form-check-inline my-2 my-lg-0 " asp-controller="Home" asp-action="Search" method="get" style="display:flex">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="margin-right:10px" name="Name">
-                        <button class=" btn-close-white my-2 my-sm-0" type="submit">Search</button>
+                    <form class="d-flex" asp-controller="Home" asp-action="Search" method="get">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="Name" />
+                        <button class="btn-search" type="submit">Search</button>
                     </form>
                 </div>
                 <partial name="_LoginPartial"></partial>
@@ -47,11 +126,12 @@
         </main>
     </div>
 
-  @*   <footer class="border-top footer text-muted">
+  @*   <footer class="footer">
         <div class="container">
-            &copy; 2024 - pharmacy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - Pharmacy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer> *@
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

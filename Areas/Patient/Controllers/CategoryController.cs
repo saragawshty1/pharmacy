@@ -32,6 +32,11 @@ namespace pharmacy.Areas.Patient.Controllers
             return result.IsNullOrEmpty() ? RedirectToAction("NotFound", "Home") : View(result);
         }
 
+        public IActionResult Details (int id)
+        {
+            var res = productRepository.Get(e => e.ProductId == id);
+            return res.IsNullOrEmpty() ? RedirectToAction("NotFound", "Home") : View(res);
+        }
 
     }
 }
