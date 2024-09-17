@@ -4,6 +4,8 @@ using DataAccess.Repository;
 using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using Models;
+using Stripe;
 
 namespace pharmacy
 {
@@ -15,11 +17,15 @@ namespace pharmacy
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages(); 
+            builder.Services.AddRazorPages();
+            
+
 
             // Register the database context
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+            StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
             // Add Identity with roles support
             builder.Services.AddIdentity<IdentityUser, IdentityRole>()

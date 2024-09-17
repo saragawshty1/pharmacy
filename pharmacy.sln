@@ -5,11 +5,11 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pharmacy", "pharmacy.csproj", "{23BE9AA7-7B19-4480-B801-0E0103253C34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "C:\Users\Masria\source\repos\DataAccess\DataAccess.csproj", "{968293A4-CF28-4BE7-954F-DAA0A0282A18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "C:\Users\Masria\source\repos\DataAccess\DataAccess.csproj", "{968293A4-CF28-4BE7-954F-DAA0A0282A18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "C:\Users\Masria\source\repos\Models\Models.csproj", "{FF3F7CC7-B180-4C37-8FAD-3F6726D6026C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utility", "C:\Users\Masria\source\repos\Utility\Utility.csproj", "{27D31D47-D8DA-4C8D-BCB7-9C164C7BB007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "C:\Users\Masria\source\repos\Utility\Utility.csproj", "{27D31D47-D8DA-4C8D-BCB7-9C164C7BB007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "C:\Users\Masria\source\repos\Models\Models.csproj", "{BC1C6F08-56C9-4995-A00B-8918560D9AD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{968293A4-CF28-4BE7-954F-DAA0A0282A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{968293A4-CF28-4BE7-954F-DAA0A0282A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{968293A4-CF28-4BE7-954F-DAA0A0282A18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF3F7CC7-B180-4C37-8FAD-3F6726D6026C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF3F7CC7-B180-4C37-8FAD-3F6726D6026C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF3F7CC7-B180-4C37-8FAD-3F6726D6026C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF3F7CC7-B180-4C37-8FAD-3F6726D6026C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{27D31D47-D8DA-4C8D-BCB7-9C164C7BB007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27D31D47-D8DA-4C8D-BCB7-9C164C7BB007}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27D31D47-D8DA-4C8D-BCB7-9C164C7BB007}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27D31D47-D8DA-4C8D-BCB7-9C164C7BB007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC1C6F08-56C9-4995-A00B-8918560D9AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC1C6F08-56C9-4995-A00B-8918560D9AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC1C6F08-56C9-4995-A00B-8918560D9AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC1C6F08-56C9-4995-A00B-8918560D9AD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
