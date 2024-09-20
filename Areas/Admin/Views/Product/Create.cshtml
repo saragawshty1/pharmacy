@@ -1,0 +1,87 @@
+﻿@model Models.Product
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-danger text-white">
+            <h4 class="text-center">Create New Product</h4>
+        </div>
+        <div class="card-body">
+            <form asp-area="Admin" asp-controller="Product" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <!-- Product Name -->
+                <div class="mb-3">
+                    <label asp-for="ProductName" class="form-label"></label>
+                    <input asp-for="ProductName" class="form-control" placeholder="Enter Product Name" />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+
+                <!-- Quantity -->
+                <div class="mb-3">
+                    <label asp-for="Qty" class="form-label"></label>
+                    <input asp-for="Qty" class="form-control" placeholder="Enter Quantity" />
+                    <span asp-validation-for="Qty" class="text-danger"></span>
+                </div>
+
+                <!-- Price -->
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label"></label>
+                    <input asp-for="Price" class="form-control" placeholder="Enter Price" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter Product Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <!-- Category -->
+                <div class="mb-3">
+                    <label asp-for="CategoryID" class="form-label"></label>
+                    <select asp-for="CategoryID" class="form-control" asp-items ="ViewBag.CategoryName">
+                        <option value="">-- Select a Category --</option>
+                    </select>
+                    <span asp-validation-for="CategoryID" class="text-danger"></span>
+                </div>
+
+                <!-- Image URL -->
+                <div class="mb-3">
+                    <label asp-for="imgurl" class="form-label"></label>
+                    <input asp-for="imgurl" class="form-control" placeholder="Enter Image URL" />
+                    <span asp-validation-for="imgurl" class="text-danger"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid gap-2">
+                    <input type="submit" value="Create Product" class="btn btn-custom btn-block">
+                </div>
+                <br>
+                <div>
+                    <a href="/Admin/DashboardHome/Index" class="btn btn-custom btn-block w-100">Back to Home</a>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    .btn-custom {
+        background-color: #d9534f;
+        color: black;
+        border-radius: 25px;
+    }
+
+        .btn-custom:hover {
+            background-color: darkred;
+            color: white;
+        }
+</style>

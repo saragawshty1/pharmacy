@@ -1,0 +1,68 @@
+﻿@model Category
+
+<div class="container my-5">
+    <div class="card form-container">
+        <div class="form-header">
+            <i class="bi bi-folder form-icon"></i> <!-- Icon for the form (Folder Icon) -->
+            <h3>Create Category</h3>
+        </div>
+        <form asp-area="Admin" asp-controller="Category" asp-action="Create">
+            <!-- Category Name Input -->
+            <div class="mb-3">
+                <label asp-for="CategoryName" class="form-label" >Category Name</label>
+                <input asp-for="CategoryName" class="form-control" id="categoryName" placeholder="Enter Category Name">
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+
+            <!-- Icon URL Input -->
+            <div class="mb-3">
+                <label asp-for="IconUrl" class="form-label">Icon URL</label>
+                <input asp-for="IconUrl" type="url" class="form-control" id="iconUrl" placeholder="Enter Icon URL">
+                <span asp-validation-for="IconUrl" class="text-danger"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid gap-2">
+                <input type="submit" value="Create Category" class="btn btn-custom btn-block">
+            </div>
+            <br>
+             <div>
+                    <a href="/Admin/DashboardHome/Index" class="btn btn-custom btn-block w-100">Back to Home</a>
+             </div>
+        </form>
+    </div>
+</div>
+
+
+@*  Add Style To Form *@
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-icon {
+        font-size: 50px;
+        color: #d9534f;
+    }
+
+    .btn-custom {
+        background-color: #d9534f;
+        color: black ;
+        border-radius: 25px;
+    }
+
+   .btn-custom:hover {
+        background-color: darkred;
+        color: white ;
+            
+   }
+</style>

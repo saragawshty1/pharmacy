@@ -1,0 +1,59 @@
+﻿@model Models.Category
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm category-form-card">
+                <h2 class="text-center mb-4">Edit Category</h2>
+
+        <form asp-area="Admin" asp-controller="Category" asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CategoryId" />
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label"></label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <label asp-for="IconUrl" class="control-label"></label>
+                <input asp-for="IconUrl" class="form-control" />
+                <span asp-validation-for="IconUrl" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                        <input type="submit" value="Save Change" class="btn btn-custom btn-block w-100" />
+            </div>
+        </form>
+               <br>
+                <div>
+                    <a href="/Admin/Category/GetAll" class="btn btn-custom btn-block w-100">Back</a>
+               </div>
+</div>
+    </div>
+       </div>
+            </div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+
+<style>
+ .btn-custom {
+        background-color: #d9534f;
+        color: black ;
+        border-radius: 25px;
+    }
+
+   .btn-custom:hover {
+        background-color: darkred;
+        color: white ;
+
+   }
+</<style>

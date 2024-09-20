@@ -36,6 +36,10 @@ namespace pharmacy.Areas.Patient.Controllers
                 };
                 _shoppingCartRepository.Add(cart);
                 _shoppingCartRepository.commit();
+
+                // var cat = cart.Product.Category.CategoryID;
+                //return RedirectToAction("ProductPerCategory", "Category");
+                //return View(cart);
             }
             else
             {
@@ -45,8 +49,8 @@ namespace pharmacy.Areas.Patient.Controllers
 
             // Fetch the shopping cart items for the user
             var result = _shoppingCartRepository.Get(e => e.ApplicationUserId == userId, e => e.Product);
+            TempData["Total"] = result.Sum(e => e.Count * e.Product.Price);
             TempData["shoppingCart"] = JsonConvert.SerializeObject(result);
-            ViewBag.Total = result.Sum(e => e.Count * e.Product.Price);
 
             return View(result);
         }
@@ -137,7 +141,8 @@ namespace pharmacy.Areas.Patient.Controllers
 
                     ApplicationUserId = userId,
                     orderDate = DateTime.Now,
-                    OrderStatusID=1,
+                    OrderStatusID = 1,
+                    totalprice = (decimal)TempData["Total"],
                     OrderItems = new List<OrderItem>() // Initialize list for order items
                 };
 
@@ -148,7 +153,7 @@ namespace pharmacy.Areas.Patient.Controllers
                     {
                         ProductId = cartItem.ProductId,
                         count = cartItem.Count,
-                          
+                         cost= cartItem.Product.Price,
                         OrderId = order.OrderId // Link OrderItem to the newly created order
                     };
 

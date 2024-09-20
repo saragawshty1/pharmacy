@@ -1,0 +1,109 @@
+﻿@model Models.Patient
+
+@{
+    ViewData["Title"] = "PatientHistory";
+}
+
+<h1>PatientHistory</h1>
+
+<h4>Patient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PatientHistory">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PatientName" class="control-label"></label>
+                <input asp-for="PatientName" class="form-control" />
+                <span asp-validation-for="PatientName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Height" class="control-label"></label>
+                <input asp-for="Height" class="form-control" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsAlzehimer" class="control-label"></label>
+                <input asp-for="IsAlzehimer" class="form-control" />
+                <span asp-validation-for="IsAlzehimer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsAntiallergic" class="control-label"></label>
+                <input asp-for="IsAntiallergic" class="form-control" />
+                <span asp-validation-for="IsAntiallergic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsAntidepressants" class="control-label"></label>
+                <input asp-for="IsAntidepressants" class="form-control" />
+                <span asp-validation-for="IsAntidepressants" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsAppetizers" class="control-label"></label>
+                <input asp-for="IsAppetizers" class="form-control" />
+                <span asp-validation-for="IsAppetizers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsCough" class="control-label"></label>
+                <input asp-for="IsCough" class="form-control" />
+                <span asp-validation-for="IsCough" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsDiabetes" class="control-label"></label>
+                <input asp-for="IsDiabetes" class="form-control" />
+                <span asp-validation-for="IsDiabetes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsInfluenza" class="control-label"></label>
+                <input asp-for="IsInfluenza" class="form-control" />
+                <span asp-validation-for="IsInfluenza" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsMassage" class="control-label"></label>
+                <input asp-for="IsMassage" class="form-control" />
+                <span asp-validation-for="IsMassage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsMultivitamins" class="control-label"></label>
+                <input asp-for="IsMultivitamins" class="form-control" />
+                <span asp-validation-for="IsMultivitamins" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IscvsHypertension" class="control-label"></label>
+                <input asp-for="IscvsHypertension" class="form-control" />
+                <span asp-validation-for="IscvsHypertension" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IscvsHypotension" class="control-label"></label>
+                <input asp-for="IscvsHypotension" class="form-control" />
+                <span asp-validation-for="IscvsHypotension" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IscvsAnticoagulant" class="control-label"></label>
+                <input asp-for="IscvsAnticoagulant" class="form-control" />
+                <span asp-validation-for="IscvsAnticoagulant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationUserId" class="control-label"></label>
+                <select asp-for="ApplicationUserId" class ="form-control" asp-items="ViewBag.ApplicationUserId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
