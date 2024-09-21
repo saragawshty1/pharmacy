@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Category>
+﻿@model HomeViewModel
+ 
 
 @{
     ViewData["Title"] = "Home Page";
@@ -34,7 +35,7 @@
              font-weight: bold;
          }
 
-        .section-header {
+     /*    .section-header {
             text-align: center;
             font-size: 24px;
             font-weight: bold;
@@ -48,6 +49,132 @@
             margin: 0 auto;
             display: block;
             margin-top: 5px;
+        } */
+
+        /* Styling for the section header */
+        .section-header {
+            font-size: 28px; /* Larger font size for emphasis */
+            font-weight: 700; /* Bold font */
+            color: #333; /* Darker, elegant color */
+            letter-spacing: 1px; /* Slight letter spacing for a modern look */
+            text-transform: uppercase; /* Uppercase for a more impactful header */
+            margin-bottom: 15px; /* Space between header and line */
+            text-align: center;
+        }
+
+        /* Styling for the section line */
+        .section-line {
+            width: 100%;
+            height: 2px;
+            background-color: #e74c3c; /* Red color matching the theme */
+            margin-top: 10px;
+            border-radius: 3px; /* Rounded edges for a modern look */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        /* Optional hover effect for the section header */
+        .section-header:hover {
+            color: #e74c3c; /* Change text color on hover to match the red line */
+            transition: color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+
+
+
+
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Reduced gap for compact layout */
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .product-card {
+            flex: 1 1 calc(16.66% - 20px); /* Six cards per row */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: calc(16.66% - 20px); /* Ensure 6 cards fit */
+            position: relative;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .product-card:hover {
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            }
+
+        .product-image {
+            width: 100%; /* Ensure image takes full width of card */
+            height: 120px; /* Smaller height for a compact look */
+            object-fit: cover; /* Crop image while maintaining aspect ratio */
+        }
+
+        .product-info {
+            padding: 10px; /* Compact padding */
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 14px; /* Smaller font size for titles */
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 16px; /* Slightly smaller price text */
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .add-to-bag-btn {
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            padding: 8px; /* Smaller button padding */
+            width: 100%;
+            cursor: pointer;
+            font-size: 14px; /* Slightly smaller font size */
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            .add-to-bag-btn:hover {
+                background-color: #b30000;
+            }
+
+        .sale-label {
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+
+        .product-card .sale-label {
+            display: none; /* Hide sale label by default */
+        }
+
+        /* Show sale label if the product is on sale */
+        .product-card.on-sale .sale-label {
+            display: block;
         }
     </style>
      @* --------------------------------------------------------------------------------- *@
@@ -79,7 +206,7 @@
 
 <div class="container">
     <div class="row text-center">
-        @foreach (var item in Model.Take(6))
+        @foreach (var item in Model.Categories.Take(6))
 
         {
             <div class="col-12 col-md-2">
@@ -95,7 +222,47 @@
         }
     </div>
 </div>
+@* ----------------------------------------------------------------------------------- *@
+<br />
+@if (User.Identity.IsAuthenticated)
+{
 
+    <div class="container">
+        <!-- Redesigned "Recommended" Section -->
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 text-center">
+                <h2 class="section-header">Recommended</h2>
+                <div class="section-line mx-auto"></div>
+            </div>
+        </div>
+    </div>
+
+}
+@* ----------------------------------------------------------------------------------- *@
+<div class="product-container">
+    @foreach (var product in Model.RecommendedProducts)
+
+
+    {
+        <div class="product-card">
+            <a href="/Patient/Category/Details/@product.ProductId">
+                <img src="~/Images/Products/@product.imgurl" class="product-image" alt="@product.ProductName" />
+            </a>
+            <div class="product-info">
+                <h3 class="product-title">@product.ProductName</h3>
+                <p class="product-price">EGP @product.Price</p>
+                <a asp-area="Patient" asp-action="Index" asp-controller="ShoppingCart" asp-route-ProductId="@product.ProductId" class="add-to-bag-btn" style="text-decoration: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                        <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                    </svg>
+                    Add to Bag
+                </a>
+            </div>
+            @* Optionally show sale label *@
+
+        </div>
+    }
+</div>
 
        @*  <!--diabetes Icon -->
         <div class="col-2 icon-container">

@@ -4,106 +4,297 @@
     ViewData["Title"] = "PatientHistory";
 }
 
-<h1>PatientHistory</h1>
+<h1 class="text-center mb-4">Patient Questionnaire</h1>
 
-<h4>Patient</h4>
+<!-- Bootstrap & jQuery -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+    .btn-maroon {
+        background-color: maroon;
+        border-color: maroon;
+        color: white;
+        font-size: 1.25rem; /* Increase font size */
+        padding: 10px 30px; /* Add more padding for size */
+    }
+
+        .btn-maroon:hover {
+            background-color: darkred;
+            border-color: darkred;
+        }
+
+    .btn-secondary {
+        background-color: grey;
+        border-color: grey;
+        color: white;
+        font-size: 1.25rem; /* Increase font size */
+        padding: 10px 30px; /* Add more padding for size */
+    }
+
+        .btn-secondary:hover {
+            background-color: dimgrey;
+            border-color: dimgrey;
+        }
+
+</style>
+
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="PatientHistory">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PatientName" class="control-label"></label>
-                <input asp-for="PatientName" class="form-control" />
-                <span asp-validation-for="PatientName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Height" class="control-label"></label>
-                <input asp-for="Height" class="form-control" />
-                <span asp-validation-for="Height" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Weight" class="control-label"></label>
-                <input asp-for="Weight" class="form-control" />
-                <span asp-validation-for="Weight" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsAlzehimer" class="control-label"></label>
-                <input asp-for="IsAlzehimer" class="form-control" />
-                <span asp-validation-for="IsAlzehimer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsAntiallergic" class="control-label"></label>
-                <input asp-for="IsAntiallergic" class="form-control" />
-                <span asp-validation-for="IsAntiallergic" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsAntidepressants" class="control-label"></label>
-                <input asp-for="IsAntidepressants" class="form-control" />
-                <span asp-validation-for="IsAntidepressants" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsAppetizers" class="control-label"></label>
-                <input asp-for="IsAppetizers" class="form-control" />
-                <span asp-validation-for="IsAppetizers" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsCough" class="control-label"></label>
-                <input asp-for="IsCough" class="form-control" />
-                <span asp-validation-for="IsCough" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsDiabetes" class="control-label"></label>
-                <input asp-for="IsDiabetes" class="form-control" />
-                <span asp-validation-for="IsDiabetes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsInfluenza" class="control-label"></label>
-                <input asp-for="IsInfluenza" class="form-control" />
-                <span asp-validation-for="IsInfluenza" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsMassage" class="control-label"></label>
-                <input asp-for="IsMassage" class="form-control" />
-                <span asp-validation-for="IsMassage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsMultivitamins" class="control-label"></label>
-                <input asp-for="IsMultivitamins" class="form-control" />
-                <span asp-validation-for="IsMultivitamins" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IscvsHypertension" class="control-label"></label>
-                <input asp-for="IscvsHypertension" class="form-control" />
-                <span asp-validation-for="IscvsHypertension" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IscvsHypotension" class="control-label"></label>
-                <input asp-for="IscvsHypotension" class="form-control" />
-                <span asp-validation-for="IscvsHypotension" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IscvsAnticoagulant" class="control-label"></label>
-                <input asp-for="IscvsAnticoagulant" class="form-control" />
-                <span asp-validation-for="IscvsAnticoagulant" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ApplicationUserId" class="control-label"></label>
-                <select asp-for="ApplicationUserId" class ="form-control" asp-items="ViewBag.ApplicationUserId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-area="Patient" asp-controller="Questioner" asp-action="PatientHistory" method="Post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <!-- Patient Name -->
+                <div class="form-group">
+                    <label asp-for="PatientName" class="control-label">Patient Name</label>
+                    <input asp-for="PatientName" class="form-control" placeholder="Enter Your Name" />
+                    <span asp-validation-for="PatientName" class="text-danger"></span>
+                </div>
+
+                <!-- Height -->
+                <div class="form-group">
+                    <label asp-for="Height" class="control-label">Height (cm)</label>
+                    <input type="number" asp-for="Height" class="form-control" placeholder="Enter Your Height" />
+                    <span asp-validation-for="Height" class="text-danger"></span>
+                </div>
+
+                <!-- Weight -->
+                <div class="form-group">
+                    <label asp-for="Weight" class="control-label">Weight (kg)</label>
+                    <input type="number" asp-for="Weight" class="form-control" placeholder="Enter Your Weight" />
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+                </div>
+
+                <!-- Yes/No Questions -->
+                <h4 class="my-4">Medical Conditions:</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Alzheimer's -->
+                        <div class="form-group">
+                            <label asp-for="IsAlzehimer" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsAlzehimer" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsAlzehimer" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsAlzehimer" class="text-danger"></span>
+                        </div>
+
+                        <!-- Antiallergic -->
+                        <div class="form-group">
+                            <label asp-for="IsAntiallergic" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsAntiallergic" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsAntiallergic" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsAntiallergic" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- Antidepressants -->
+                        <div class="form-group">
+                            <label asp-for="IsAntidepressants" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsAntidepressants" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsAntidepressants" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsAntidepressants" class="text-danger"></span>
+                        </div>
+
+                        <!-- Appetizers -->
+                        <div class="form-group">
+                            <label asp-for="IsAppetizers" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsAppetizers" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsAppetizers" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsAppetizers" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More Conditions -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IsCough" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsCough" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsCough" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsCough" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IsDiabetes" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsDiabetes" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsDiabetes" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsDiabetes" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- More Conditions -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IsMassage" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsMassage" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsMassage" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsMassage" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IsMultivitamins" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsMultivitamins" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IsMultivitamins" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IsMultivitamins" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- More Conditions -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IscvsHypertension" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IscvsHypertension" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IscvsHypertension" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IscvsHypertension" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IscvsHypotension" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IscvsHypotension" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IscvsHypotension" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IscvsHypotension" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More Conditions -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="IscvsAnticoagulant" class="control-label"></label>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IscvsAnticoagulant" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" asp-for="IscvsAnticoagulant" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                            <span asp-validation-for="IscvsAnticoagulant" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                
+                </div>
+
+                <!-- Submit Button & Modal -->
+               @*  <div class="text-center">
+                    <button type="submit" class="btn btn-primary" width="50px" height="50px" style="background-color: maroon; border-color: maroon;">
+                        Submit
+                    </button>
+                </div> *@
+                <div class="text-center">
+                    <div class="d-inline-block mx-2">
+                        <button type="submit" class="btn btn-maroon">
+                            Submit
+                        </button>
+                    </div>
+                    <div class="d-inline-block mx-2">
+                        <a href="/Patient/Home/Index" class="btn btn-secondary">Skip</a>
+                    </div>
+                </div>
+
+
+                <!-- Modal -->
+              @*   <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="submitModalLabel">Submission Success</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Patient Questionnaire saved successfully.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <a asp-area="Patient" asp-action="PatientHistory" asp-controller="Questioner" type="button" class="btn btn-primary">Start Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> *@
+
+                <!-- Skip Button -->
+               @*  <div class="text-center mt-3">
+                    <a href="/Patient/Home/Index" class="btn btn-secondary">Skip</a>
+                </div> *@
+            </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

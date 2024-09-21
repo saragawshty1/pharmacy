@@ -1,4 +1,5 @@
 ﻿using DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -22,6 +23,7 @@ namespace pharmacy.Areas.Patient.Controllers
             this.userManager = userManager;
             this.orderRepository = orderRepository;
         }
+        [Authorize]
         public IActionResult Index(int ProductId)
         {
             var userId = userManager.GetUserId(User);
@@ -142,7 +144,7 @@ namespace pharmacy.Areas.Patient.Controllers
                     ApplicationUserId = userId,
                     orderDate = DateTime.Now,
                     OrderStatusID = 1,
-                    totalprice = (decimal)TempData["Total"],
+                   // totalprice = (decimal)TempData["Total"],
                     OrderItems = new List<OrderItem>() // Initialize list for order items
                 };
 
