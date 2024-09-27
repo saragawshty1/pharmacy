@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="C:\Users\Masria\source\repos\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="C:\Users\Masria\source\repos\Models\Models.csproj" />
     <ProjectReference Include="C:\Users\Masria\source\repos\Utility\Utility.csproj" />
   </ItemGroup>
 

@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace pharmacy.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    
+    [Authorize(Roles = "Admin")]
+
     public class DashboardHomeController : Controller
     {
         private readonly IProductRepository _productRepository;
@@ -36,18 +37,35 @@ namespace pharmacy.Areas.Admin.Controllers
             var patientCount = _patientRepository.Get(null).Count();
 
             //Fetch the count of orders
-            var orderCount = _orderRepository.Get(null).Count();
+            var orderCount = _patientRepository.Get(null).Count();
 
 
             ViewBag.ProductCount = productCount;
             ViewBag.CategoryCount = categoryCount;
             ViewBag.patientCount = patientCount;
             ViewBag.orderCount = orderCount;
+           
             var result = _productRepository.Get(null);
             return View(result);
         }
 
-        
+        public IActionResult Search(String name)
+        {
+            var product = _productRepository.Get(e => e.ProductName.Contains(name), e => e.Category);
+                if(product != null)
+                {
+                    return View(product);
+                }
+                else
+                {
+                    return View("NotFound");
+               }
+        }
+
+        public IActionResult NotFound()
+        {
+            return View();
+        }
 
 
     }

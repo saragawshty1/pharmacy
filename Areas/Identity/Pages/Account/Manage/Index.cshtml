@@ -2,43 +2,137 @@
 @using Models
 
 @model IndexModel // Change this to your IndexModel class
-@{
-    ViewData["Title"] = "Profile";
+@{ 
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
+<style> 
+.patient-info-container {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: gray;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.list-group-item {
+    font-size: 18px;
+    padding: 10px 15px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item strong {
+    color: maroon;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: #f1f1f1;
+}
+
+.alert-warning {
+    text-align: center;
+    font-weight: bold;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+</style>
 <h3>@ViewData["Title"]</h3>
 
-<div>
+
+
+<div class="patient-info-container">
     @if (Model.PatientModel != null)
     {
-        if (Model.PatientModel.IsInfluenza==true)
-        {
-            <p>Influenza: Yes</p>
-        }
-
-        if (Model.PatientModel.IsDiabetes == true)
-        {
-            <p><strong>Diabetes:</strong> Yes</p>
-        }
-
-        if (Model.PatientModel.IsAlzehimer == true)
-        {
-            <p><strong>Alzheimer:</strong> Yes</p>
-        }
-
-        if (Model.PatientModel.IsAntiallergic == true)
-        {
-            <p><strong>Antiallergic:</strong> Yes</p>
-        }
-
-        if (Model.PatientModel.IsAntidepressants == true)
-        {
-            <p><strong>Antidepressants:</strong> Yes</p>
-        }
+        <h3 class="section-title">Patient Health Conditions<br />  <strong style="text-align:center;color:maroon;background-color:gray"> Welcome @Model.PatientModel.PatientName</strong></h3>
+        <ul class="list-group list-group-flush">
+            
+            @if (Model.PatientModel.IsInfluenza == true)
+            {
+                <li class="list-group-item">
+                    <strong>Influenza:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IsDiabetes == true)
+            {
+                <li class="list-group-item">
+                    <strong>Diabetes:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IsAlzehimer == true)
+            {
+                <li class="list-group-item">
+                    <strong>Alzheimer:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IsAntiallergic == true)
+            {
+                <li class="list-group-item">
+                    <strong>Antiallergic:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IsAntidepressants == true)
+            {
+                <li class="list-group-item">
+                    <strong>Antidepressants:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IsCough == true)
+            {
+                <li class="list-group-item">
+                    <strong>Cough:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IsAppetizers == true)
+            {
+                <li class="list-group-item">
+                    <strong>Appetizers:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IscvsHypertension == true)
+            {
+                <li class="list-group-item">
+                    <strong>CVS Hypertension:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IscvsHypotension == true)
+            {
+                <li class="list-group-item">
+                    <strong>CVS Hypotension:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IscvsAnticoagulant == true)
+            {
+                <li class="list-group-item">
+                    <strong>Anticoagulant:</strong> Yes
+                </li>
+            }
+            @if (Model.PatientModel.IsMultivitamins == true)
+            {
+                <li class="list-group-item">
+                    <strong>Multivitamins:</strong> Yes
+                </li>
+            }
+        </ul>
     }
     else
     {
-        <p>No patient information available.</p>
+        <div class="alert alert-warning" role="alert">
+            No patient information available.
+        </div>
     }
 </div>

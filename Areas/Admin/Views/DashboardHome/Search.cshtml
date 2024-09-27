@@ -1,0 +1,76 @@
+﻿@model List<Product>
+
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    @foreach(var item in Model)
+    {
+         <div class="card shadow-lg">
+        <div class="row g-0">
+            <!-- Product Image -->
+            <div class="col-md-4">
+                <img src="~/images/Products/@item.imgurl" class="img-fluid rounded-start" alt="@item.ProductName">
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title text-danger">@item.ProductName</h3>
+                    <hr>
+
+                    <!-- Product Description -->
+                    <p class="card-text">
+                        <strong>Description:</strong> @item.Description
+                    </p>
+
+                    <!-- Product Category -->
+                    <p class="card-text">
+                        <strong>Category:</strong> @item.Category.CategoryName
+                    </p>
+
+                    <!-- Product Quantity -->
+                    <p class="card-text">
+                        <strong>Qty:</strong> @item.Qty
+                    </p>
+
+                    <!-- Product Price -->
+                    <h4 class="card-text">
+                        <strong>Price:</strong> $@item.Price
+                    </h4>
+
+                    <!-- Action Buttons -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    }
+    
+</div>   
+
+<!-- Styling for better visual appeal -->
+<style>
+    .card {
+        border-radius: 15px;
+        margin-bottom:20px;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .card-title {
+        font-weight: bold;
+    }
+
+    .card img {
+        border-radius: 15px 0 0 15px;
+        object-fit: cover;
+        height: 100%;
+    }
+
+</style>

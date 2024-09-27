@@ -1,10 +1,12 @@
 ﻿using DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace pharmacy.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _CategoryRepository;
@@ -77,7 +79,7 @@ namespace pharmacy.Areas.Admin.Controllers
             }
             else
             {
-                return RedirectToAction("NotFound", "Home" );
+                return RedirectToAction("NotFound" , "DashboardHome");
             }
         }
 
