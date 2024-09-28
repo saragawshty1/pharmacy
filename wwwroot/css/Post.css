@@ -1,0 +1,107 @@
+.facebook-post {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    /* Remove align-items: center; */
+    margin-bottom: 20px; /* Space between posts */
+    padding-top: 20px; /* Add space from the top */
+}
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: url('https://img.icons8.com/?size=100&id=AZOFoSZnC0QG&format=png&color=000000');
+    background-size: cover;
+    background-position: center;
+}
+
+.facebook-post .post-container {
+    width: 800px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    justify-content: center;
+    /*display: flex;*/
+    /*align-items: center;*/
+}
+
+    .facebook-post .post-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .facebook-post .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #ccc;
+    }
+
+    .facebook-post .post-info {
+        margin-left: 10px;
+    }
+
+        .facebook-post .post-info h4 {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .facebook-post .post-info small {
+            color: #65676b;
+            font-size: 12px;
+        }
+
+    .facebook-post .post-text {
+        margin-top: 5px;
+        font-size: 14px;
+        color: #1c1e21;
+    }
+
+    .facebook-post .post-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+    }
+
+.facebook-post .post-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+    .facebook-post .post-actions button {
+        background-color: transparent;
+        border: none;
+        color: #65676b;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 14px;
+        justify-content: center;
+    }
+
+            .facebook-post .post-actions button:hover {
+                color: #1877f2;
+            }
+
+    .facebook-post .post-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #65676b;
+        font-size: 12px;
+    }
+
+        .facebook-post .post-stats .likes {
+            display: flex;
+            align-items: center;
+        }
+
+            .facebook-post .post-stats .likes span {
+                margin-left: 5px;
+            }

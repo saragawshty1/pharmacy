@@ -1,0 +1,82 @@
+﻿@model Post
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Post Mockup</title>
+    <link rel="stylesheet" href="~/css/Post.css" asp-append-version="true" />
+   
+</head>
+<body>
+    <form asp-area="Patient" asp-controller="Post" asp-action="Index">
+    @*===============Write Post=====================================================*@
+    <div class="facebook-post">
+        <div class="post-container">
+            <div class="post-header">
+                @* <div class="profile-pic"></div> *@
+                <div class="post-info">
+                    @* <h4>@Model.PatientName</h4> *@
+                    @* <small>Patient· <i class="fas fa-globe"></i></small> *@
+                </div>
+            </div>
+           @*  <div class="post-text">
+                Insert text here.<br>
+                #tagOne<br>
+                https://enter-url
+            </div> *@
+            <!-- POst Title-->
+            <div class="form-group">
+                <label asp-for="@Model.Title" class="control-label">Post Title</label>
+                    <input asp-for="@Model.Title" class="form-control" placeholder="Enter Your Post Tilte" />
+                    <span asp-validation-for="@Model.Title" class="text-danger"></span>
+            </div>
+
+            <!-- Content -->
+            <div class="form-group">
+                    <label asp-for="@Model.PostContent" class="control-label">Post:</label>
+                    <input type="text" asp-for="@Model.PostContent" class="form-control" placeholder="Enter Your Post Content" />
+                    <span asp-validation-for="@Model.PostContent" class="text-danger"></span>
+            </div>
+
+           @*  <div class="post-stats">
+                <div class="likes">
+                    <span>❤️</span>
+                    <span>420</span>
+                </div>
+                <div>
+                    <span>13 Comments</span> · <span>99 Shares</span>
+                </div>
+            </div> *@
+            <div class="post-footer">
+                @* <div class="post-actions">
+                    <button><i class="far fa-thumbs-up"></i> Like</button>
+                    <button><i class="far fa-comment"></i> Comment</button>
+                    <button><i class="fas fa-share"></i> Share</button>
+                </div> *@
+                    <div style="display: flex; justify-content: center; margin-top: 20px;">
+                        <button class="btn btn-secondary"
+                                style="
+                background-color: #6c757d; /* Secondary button color */
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;">
+                            Add Post
+                        </button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </form>
+    @*===============================================================================================*@
+   
+</body>
+</html>

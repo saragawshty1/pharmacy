@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Post>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Post Mockup</title>
+    <link rel="stylesheet" href="~/css/Post.css" asp-append-version="true" />
+
+</head>
+<body>
+    @foreach(var item in Model)
+    {
+<div class="facebook-post">
+    <div class="post-container">
+        <div class="post-header">
+                    <div class="profile-pic">
+                        <i class="fas fa-user-circle fa-5x"></i>
+                    </div>
+            <div class="post-info">
+                <h4>@item.Patients.PatientName</h4>
+                <small>Patient · <i class="fas fa-globe"></i></small>
+            </div>
+        </div>
+        <div class="post-text">
+           @item.PostContent
+        </div>
+        <div class="post-stats">
+            <div class="likes">
+              @*   <span>❤️</span>
+                <span>420</span> *@
+            </div>
+            <div>
+                @* <span>13 Comments</span> · <span>99 Shares</span> *@
+            </div>
+        </div>
+        <div class="post-footer">
+                    <div class="post-actions  ">
+                @* <button><i class="far fa-thumbs-up"></i> Like</button> *@
+                @* <button><i class="far fa-comment"></i> Comment</button> *@
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary">
+                                <i class="far fa-comment"></i> Comment
+                            </button>
+                        </div>
+                @* <button><i class="fas fa-share"></i> Share</button> *@
+            </div>
+            @* <button class="learn-more">Learn More</button> *@
+        </div>
+    </div>
+</div>
+    }
+</body>
+</html>
