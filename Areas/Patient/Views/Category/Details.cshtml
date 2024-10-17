@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>
+﻿@model ProductDetailsViewModel
 
 
     <style>
@@ -109,30 +109,242 @@
             background-color: #ffcccc;
         }
 
-    </style>
-    @foreach(var item in Model)
+    
+    /* Optional styling adjustments */
+    .form-group textarea {
+        font-size: 16px;
+        width: 50%;
+        height: 100px;
+        padding: 10px; /* Adds padding inside the textarea */
+        border: 1px solid #ccc; /* Sets a light border around the textarea */
+        border-radius: 5px; /* Rounds the corners of the textarea */
+    }
+
+
+    .btn {
+        padding: 10px 20px;
+        background-color:maroon;
+    }
+
+   /*  .reviews-section {
+        margin-top: 30px;
+    }
+
+    .review-item {
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+    }
+
+        /* .review-item p {
+             margin: 0 0 10px; 
+        /*     display: flex;
+            align-items: center; 
+     
+
+    .review-text {
+        margin-top: 30px;
+  
+        font-size: 14px;
+        color: #1c1e21;
+        
+        display: flex;
+     /*    align-items: center;
+
+        }
+
+    .profile-pic {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-image: url('https://img.icons8.com/?size=100&id=AZOFoSZnC0QG&format=png&color=000000');
+        background-size: cover;
+        background-position: center;
+    }
+
+   .post-info {
+        margin-left: 10px;
+    } */
+    .reviews-section {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .review-item {
+        background-color: #ffffff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        transition: transform 0.2s ease;
+    }
+
+        .review-item:hover {
+            transform: translateY(-5px);
+        }
+
+   /*  .profile-pic i {
+        color: #4a4a4a;
+    } */
+    .profile-pic {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-image: url('https://img.icons8.com/?size=100&id=AZOFoSZnC0QG&format=png&color=000000');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .post-info {
+        margin-bottom: 5px;
+    }
+
+    .review-text {
+        font-size: 16px;
+        color: #333;
+        margin-top: 10px;
+        line-height: 1.5;
+    }
+
+        .post-info p,
+        .review-text p {
+            margin: 0;
+        }
+
+   /*  .profile-pic {
+        flex-shrink: 0;
+    }
+
+        .profile-pic i {
+            font-size: 50px;
+        } */
+
+    .post-info strong {
+        font-size: 17px;
+        color: black;
+    }
+
+    .review-content {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+    
+    @foreach(var item in Model.Details)
     {
 <div class="product-detail-container">
+    @if(item.Qty == 0)
+    {
     <div class="product-image-section">
-        <div class="featured-label">FEATURED</div>
+        <div class="featured-label">Out Of Stock</div>
             <img src="~/Images/Products/@item.imgurl" alt="Product" class="main-product-image">
     </div>
     <div class="product-info-section">
         <h1 class="product-title">@item.ProductName</h1>
-        <p class="product-stock-status">In stock</p>
+            <p class="product-stock-status">Out Of Stock</p>
         <p>@item.Description</p>
         <p class="product-price">EGP @item.Price</p>
 
 
 
-            <a href="@Url.Action("Index", "ShoppingCart", new { ProductId = item.ProductId })" class="add-to-bag-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
-                    <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
-                </svg>
-                ADD TO BAG
-            </a>
+                <a href="@Url.Action("Index", "ShoppingCart", new { ProductId = item.ProductId })" class="add-to-bag-btn btn btn-secondary disabled" @(item.Qty <= 0 ? "onclick='return false;'" : "")>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                        <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                    </svg>
+                    ADD TO BAG
+                </a>
 
        @*  <button class="buy-now-btn">BUY NOW</button> *@
     </div>
+        }
+        else 
+            {
+                <div class="product-image-section">
+                    <div class="featured-label">In Stock</div>
+                    <img src="~/Images/Products/@item.imgurl" alt="Product" class="main-product-image">
+                </div>
+                <div class="product-info-section">
+                    <h1 class="product-title">@item.ProductName</h1>
+                    <p class="product-stock-status">@((int)item.Qty) Available In stock</p>
+                    <p>@item.Description</p>
+                    <p class="product-price">EGP @item.Price</p>
+
+
+
+                    <a href="@Url.Action("Index", "ShoppingCart", new { ProductId = item.ProductId })" class="add-to-bag-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                        </svg>
+                        ADD TO BAG
+                    </a>
+
+                    @*  <button class="buy-now-btn">BUY NOW</button> *@
+                </div>
+             
+
+            }
+
+         
+
+
 </div>
+
+//feedbacks
+    @if (Model.Feedbacks != null && Model.Feedbacks.Any())
+
+
+
+    {
+        <div class="reviews-section mt-5">
+            <h4 style="font-style:italic;color:maroon">Customer Reviews</h4>
+            @foreach (var review in Model.Feedbacks)
+
+            {
+                <!-- Single Review -->
+                <div class="review-item">
+                    <div class="profile-pic">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="review-content">
+                        <div class="post-info">
+                            <p><strong>@review.ApplicationUser?.UserName</strong></p>
+                        </div>
+                        <div class="review-text">
+                            <p>@review.Name</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    }
+
+//add review
+
+
+    <div class="container mt-5">
+        <h3 style="color:maroon;font-style:italic">Write a review </h3>
+        <form asp-area="Patient" asp-action="AddReview" method="post" asp-route-ProductId="@item.ProductId">
+            <input type="hidden" name="ProductId" value="@item.ProductId" />
+            <div class="form-group">
+                <textarea class="form-control" name="Name" rows="5"  placeholder="Write your Review here"></textarea>
+            </div>
+            <button type="submit" class="btn btn-danger mt-2">Submit</button>
+        </form>
+    </div>
+    
+    @section ShowFooter {
+    <footer class="footer mt-auto py-3">
+        <!-- Footer content here -->
+    </footer>
+    }
 }

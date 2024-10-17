@@ -30,22 +30,27 @@ namespace pharmacy.Areas.Admin.Controllers
                     Email = user.Email,
                     Address = user.Adress
                 };
-                var result = await usermanager.CreateAsync(newUser , user.Password);
+                var result = await usermanager.CreateAsync(newUser, user.Password);
                 if (result.Succeeded)
                 {
+                    if (!string.IsNullOrEmpty(user.Role))
+                    {
+                        await usermanager.AddToRoleAsync(newUser, user.Role);
+                    }
                     TempData["add"] = "User Added successfully";
                     return RedirectToAction("Index", "DashboardHome");
                 }
                 else
                 {
-                    foreach(var erorr in result.Errors)
+                    foreach (var erorr in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, erorr.Description);
                     }
                 }
-                
+
             }
             return View(user);
         }
+
     }
 }

@@ -1,22 +1,26 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Pharmacy</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/pharmacy.styles.css" asp-append-version="true" />
+    @* <link rel="stylesheet" href="~/pharmacy.styles.css" asp-append-version="true" /> *@
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 0;
+            margin: 2px;
             padding: 0;
             background-color: #f4f4f4;
+            vertical-align: middle;
+            min-height:100vh;
         }
 
         .navbar {
             background-color: #800000; /* Maroon background */
+            margin-bottom:10px;
+            padding:20px;
+            
         }
 
         .navbar-brand {
@@ -25,20 +29,11 @@
             font-weight: bold;
         }
 
-            .navbar-brand:hover {
-                color: #e6e6e6 !important;
-            }
-
         .navbar-nav .nav-link {
             color: #ffffff !important;
             font-size: 1rem;
             padding: 10px 15px;
         }
-
-            .navbar-nav .nav-link:hover {
-                color: #e6e6e6 !important;
-                background-color: rgba(255, 255, 255, 0.1);
-            }
 
         .navbar-toggler-icon {
             background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23ffffff" viewBox="0 0 16 16"><path d="M2 4h12v1H2V4zm0 3h12v1H2V7zm0 3h12v1H2v-1z"/></svg>');
@@ -58,32 +53,53 @@
             margin-left: 10px;
         }
 
-            .btn-search:hover {
-                background-color: #f2f2f2;
+        .d-flex {
+            justify-content: flex-end; /* This centers the form horizontally */
+            align-items: center; /* This ensures vertical alignment */
+        }
+
+        .custom-footer {
+            background-color: #b23b3b;
+            color: white;
+            padding: 40px 0;
+            margin-top: 30px; /* Ensures it is well-positioned at the bottom */
+        }
+
+            .custom-footer h5 {
+                font-weight: bold;
+                margin-top: 10px; 
+                color: #fff;
             }
 
-        .container {
-            padding: 20px;
-        }
+            .custom-footer .footer-text {
+                font-size: 14px;
+                line-height: 1.6;
+                color: #fff;
+                margin-bottom: 0;
+            }
 
-        footer {
-            padding: 5px;
-            text-align: center;
-            background-color: #343a40;
-            color: white;
-            margin-top: 5px;
-        }
+            .custom-footer .footer-icon {
+                font-size: 40px;
+                color: #fff;
+                margin-bottom: 10px;
+            }
 
-            footer a {
-                color: #d9534f;
+            .custom-footer .footer-link {
+                color: #fff;
                 text-decoration: none;
             }
 
-                footer a:hover {
+                .custom-footer .footer-link:hover {
                     text-decoration: underline;
                 }
+
+            .custom-footer p {
+                margin: 0;
+                color: #fff;
+            }
     </style>
 </head>
+ 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -100,29 +116,62 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Patient" asp-controller="Category" asp-action="Index">Shop by Category</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @*Dropdown------------------------------------------------------------*@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Medical Consultation
+                            </a>
+
+                            <ul class="dropdown-menu">
+                              
+                                <li class="dropdown-item">
+                            <a class="dropdown-item" asp-area="Patient" asp-controller="Post" asp-action="Index">Add Post</a>
+                        </li>
+
+                                <li class="dropdown-item">
+                                    <a class="dropdown-item" asp-area="Patient" asp-controller="Community" asp-action="Index">Community</a>
+                        </li>
+                        @if(User.Identity.IsAuthenticated && User.IsInRole("Doctor"))
                         {
 
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Patient" asp-controller="Post" asp-action="Index">Medical consultations</a>
-                            </li>
-
-
+                                    <li class="dropdown-item">
+                                        <a class="dropdown-item" asp-area="Doctor" asp-controller="Comment" asp-action="GetPost">Manage Posts</a>
+                        </li>
+                        }
+                        </ul>
+                        </li>
+                        @*carttttttttttttt*@
+                       
+                        @if (User.Identity.IsAuthenticated)
+                         {
+                            
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Patient" asp-action="Index" asp-controller="ShoppingCart">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
-                                        <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
                                     </svg>
 
                                 </a>
                             </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Patient" asp-action="AddToFavorite" asp-controller="Category">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-heart-fill" viewBox="0 0 16 16">
+                                        <path d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                                    </svg>
 
-                            
+                                </a>
+                            </li>
                         }
+                       
+
+
+                   
+                         
                     </ul>
                     <form class="d-flex" asp-controller="Home" asp-action="Search" method="get">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="Name" />
@@ -133,20 +182,69 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container   min-vh-200">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-@* 
-      <footer>
-    <p>&copy; 2024 Pharmacy | <a href="#">Privacy Policy</a></p>
-    </footer>
- *@
+    @if (IsSectionDefined("ShowFooter"))
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    {
+
+        <footer class="custom-footer mt-auto py-3">
+            <div class="container">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <i class="bi bi-truck footer-icon"></i>
+                    <h5>FAST & FREE SHIPPING</h5>
+                    <p class="footer-text">Get your order delivered the same or next day</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <i class="bi bi-tag footer-icon"></i>
+                    <h5>DISCOUNTS & OFFERS</h5>
+                    <p class="footer-text">Enjoy different promotions, brand discounts</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <i class="bi bi-lock footer-icon"></i>
+                    <h5>SECURE SHOPPING</h5>
+                    <p class="footer-text">We prioritize your security with safe transactions.</p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <i class="bi bi-headset footer-icon"></i>
+                    <h5>CUSTOMER SUPPORT</h5>
+                    <p class="footer-text">Reach out for any queries or support.</p>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <a href="#" class="footer-link">Terms & Conditions</a> |
+                    <a href="#" class="footer-link">Privacy Policy</a> |
+                    <a href="#" class="footer-link">Contact Us</a>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col text-center">
+                    <p>&copy; 2024 Your Pharmacy | All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    }
+
+
+   
+
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ 
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("ShowFooter", required: false)
 </body>
 </html>

@@ -40,26 +40,57 @@ namespace pharmacy.Areas.Patient.Controllers
                 // Add Alzheimer's products if applicable
                 if (patient.IsCough == true)
                 {
-                    var alzheimerProducts = productRepository.Get(e => e.CategoryID == 5, e => e.Category).Take(2);
+                    var alzheimerProducts = productRepository.Get(e => e.CategoryID == 5, e => e.Category).Take(4);
                     recommendedProducts.AddRange(alzheimerProducts);
                 }
 
                 // Add Antiallergic products if applicable
                 if (patient.IsAntiallergic == true)
                 {
-                    var antiallergicProducts = productRepository.Get(e => e.CategoryID == 2, e => e.Category).Take(2);
+                    var antiallergicProducts = productRepository.Get(e => e.CategoryID == 2, e => e.Category).Take(4);
                     recommendedProducts.AddRange(antiallergicProducts);
                 }
                 if (patient.IsAntidepressants == true)
                 {
-                    var Antidepressants = productRepository.Get(e => e.CategoryID == 3, e => e.Category).Take(2);
+                    var Antidepressants = productRepository.Get(e => e.CategoryID == 3, e => e.Category).Take(4);
                     recommendedProducts.AddRange(Antidepressants);
                 }
                 if (patient.IsInfluenza == true)
                 {
-                    var Influenza = productRepository.Get(e => e.CategoryID == 7, e => e.Category).Take(2);
+                    var Influenza = productRepository.Get(e => e.CategoryID == 7, e => e.Category).Take(4);
                     recommendedProducts.AddRange(Influenza);
                 }
+                if (patient.IscvsHypertension == true)
+                {
+                    var IscvsHypertension = productRepository.Get(e => e.CategoryID == 10, e => e.Category).Take(4);
+                    recommendedProducts.AddRange(IscvsHypertension);
+                }
+                if (patient.IscvsHypotension == true)
+                {
+                    var IscvsHypotension = productRepository.Get(e => e.CategoryID == 11, e => e.Category).Take(4);
+                    recommendedProducts.AddRange(IscvsHypotension);
+                }
+                if (patient.IsDiabetes == true)
+                {
+                    var IsDiabetes = productRepository.Get(e => e.CategoryID == 6, e => e.Category).Take(4);
+                    recommendedProducts.AddRange(IsDiabetes);
+                }
+                if (patient.IsMassage == true)
+                {
+                    var IsMassage = productRepository.Get(e => e.CategoryID == 8, e => e.Category).Take(4);
+                    recommendedProducts.AddRange(IsMassage);
+                }
+                if (patient.IsAppetizers == true)
+                {
+                    var IsAppetizers = productRepository.Get(e => e.CategoryID == 4, e => e.Category).Take(4);
+                    recommendedProducts.AddRange(IsAppetizers);
+                }
+                if (patient.IsAlzehimer == true)
+                {
+                    var IsAlzehimer = productRepository.Get(e => e.CategoryID == 1, e => e.Category).Take(4);
+                    recommendedProducts.AddRange(IsAlzehimer);
+                }
+
             }
 
             // Ensure distinct products in case of overlap between categories (optional)

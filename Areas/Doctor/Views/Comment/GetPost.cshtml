@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Post>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Post Mockup</title>
+    <link rel="stylesheet" href="~/css/Post.css" asp-append-version="true" />
+    <style>
+        <style >
+        /* Styling for the Comment button */
+        /* Styling for the Comment button */
+        .comment-toggle {
+            background-color: #800000; /* Maroon color */
+            color: white;
+            border-radius: 15px;
+            padding: 5px 15px; /* Smaller padding for smaller size */
+            font-size: 14px; /* Smaller font size */
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .comment-toggle:hover {
+            background-color: #660000; /* Darker maroon on hover */
+        }
+
+        /* Styling for the Comment area */
+        .comment-area {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+            border: 1px solid #dcdcdc;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+            /* Styling for the text area with increased height */
+            .comment-area textarea {
+                width: 100%;
+                height: 120px; /* Increased height */
+                border: 1px solid #ced4da;
+                border-radius: 15px;
+                padding: 10px;
+                font-size: 14px;
+                transition: border-color 0.3s ease;
+            }
+
+                .comment-area textarea:focus {
+                    outline: none;
+                    border-color: #80bdff;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+                }
+
+            /* Styling for the Submit button */
+            .comment-area .btn-submit {
+                background-color: #800000;
+                color: white;
+                border-radius: 20px;
+                padding: 10px 20px;
+                border: none;
+                font-size: 16px;
+                margin-top: 10px;
+                transition: background-color 0.3s ease;
+            }
+
+                .comment-area .btn-submit:hover {
+                    background-color: #218838;
+                }
+    </style>
+</head>
+<body>
+
+   <form method="get" action="@Url.Action("GetPost")">
+    <label for="filter">Filter posts by:</label>
+    <select id="filter" name="filter" onchange="this.form.submit()">
+        <option value="null">All</option>
+        <option value="replied">Replied</option>
+        <option value="not_replied">Not Replied Yet</option>
+    </select>
+</form>
+    @foreach (var item in Model)
+    {
+        <div class="facebook-post">
+            <div class="post-container">
+                <div class="post-header">
+                    <div class="profile-pic">
+                        <i class="fas fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="post-info">
+                        <h4>@item.Patients.PatientName</h4>
+                        <small>Patient · <i class="fas fa-globe"></i></small>
+                    </div>
+                </div>
+                <div class="post-text">
+                    @item.PostContent
+                </div>
+                <div class="post-footer">
+                    <div class="d-flex justify-content-center">
+                        <!-- Button to toggle comment area -->
+                        <button class="btn btn-primary comment-toggle" style="background-color: maroon; color: white; padding: 12px 11px; font-size: 12px; border-radius: 6px; border: none;text-align: center;">
+                            <i class="far fa-comment"></i> Comment
+                        </button>
+                    </div>
+
+                    <!-- Hidden comment area -->
+                    <div class="comment-area">
+                        <form asp-area="Doctor" asp-controller="Comment" asp-action="AddComment" method="post" class="form-horizontal">
+                            <input type="hidden" name="PostID" value="@item.Id" />
+                            <div class="form-group">
+                                <textarea name="CommentContent" class="form-control" placeholder="Write a comment"></textarea>
+                            </div>
+                            <br />
+                            <button type="submit" class="btn btn-primary" style="background-color:dimgray">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    <script>
+        // JavaScript to toggle comment area visibility
+        document.querySelectorAll('.comment-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentArea = this.closest('.post-footer').querySelector('.comment-area');
+                commentArea.style.display = commentArea.style.display === 'none' || commentArea.style.display === '' ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

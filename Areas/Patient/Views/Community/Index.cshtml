@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Post>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts and Comments</title>
+    <link rel="stylesheet" href="~/css/communtiy.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="post-container">
+                <div class="post-section">
+                    
+                    <div class="post">
+                      
+                        <div class="post-header">
+                            @item.Patients.PatientName</div>
+                        <div class="post-content">@item.PostContent</div>
+
+                    </div>
+                </div>
+
+                <div class="comments-section">
+                    <h3>Comments</h3>
+                    @if (item.Comments.Any())
+                    {
+                        foreach (var comment in item.Comments)
+                        {
+                            <div class="comment">
+                                <strong>Dr @comment.Doctors?.DoctorName:</strong> @comment.CommentContent
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="no-comments">No comments yet.</div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    @section ShowFooter {
+        <footer class="footer mt-auto py-3">
+            <!-- Footer content here -->
+        </footer>
+    }
+</body>
+</html>

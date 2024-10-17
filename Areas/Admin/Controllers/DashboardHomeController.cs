@@ -40,10 +40,19 @@ namespace pharmacy.Areas.Admin.Controllers
             var orderCount = _patientRepository.Get(null).Count();
 
 
+            //Count In Stock Products 
+            var InStockProduct = _productRepository.Get(e => e.Qty != 0).Count();
+
+            //Count Out Stock Products 
+            var OutStockProduct = _productRepository.Get(e => e.Qty == 0).Count();
+
+
             ViewBag.ProductCount = productCount;
             ViewBag.CategoryCount = categoryCount;
             ViewBag.patientCount = patientCount;
             ViewBag.orderCount = orderCount;
+            ViewBag.InStockProduct = InStockProduct;
+            ViewBag.OutStockProduct = OutStockProduct;
            
             var result = _productRepository.Get(null);
             return View(result);
@@ -67,6 +76,12 @@ namespace pharmacy.Areas.Admin.Controllers
             return View();
         }
 
+        public IActionResult ManageInventory()
+
+        {
+            var result = _productRepository.Get(null);
+            return View(result);
+        }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using DataAccess.Repository.IRepository;
+﻿using DataAccess.Repository;
+using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +15,16 @@ namespace pharmacy.Areas.Patient.Controllers
         private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly UserManager<IdentityUser> userManager;
         private readonly IOrderRepository orderRepository;
+        private readonly IProductRepository productRepository;
 
         public ShoppingCartController(IShoppingCartRepository _shoppingCartRepository,
-            UserManager<IdentityUser> userManager, IOrderRepository orderRepository)
+            UserManager<IdentityUser> userManager, IOrderRepository orderRepository, IProductRepository productRepository)
         {
 
             this._shoppingCartRepository = _shoppingCartRepository;
             this.userManager = userManager;
             this.orderRepository = orderRepository;
+            this.productRepository = productRepository;
         }
         [Authorize]
         public IActionResult Index(int ProductId)
@@ -159,12 +162,33 @@ namespace pharmacy.Areas.Patient.Controllers
                         OrderId = order.OrderId // Link OrderItem to the newly created order
                     };
 
+                    var existingProduct = productRepository.GetOne(e=>e.ProductId== cartItem.ProductId);
+                    if (existingProduct != null)
+                    {
+                        existingProduct.Qty -= cartItem.Count;
+                        // Update other properties if necessary...
+                        productRepository.Update(existingProduct);
+                    }
+                    //var Product = new Product
+                    //{
+
+                    //    Qty = cartItem.Product.Qty- cartItem.Count,
+                    //    ProductName = cartItem.Product.ProductName,
+                    //    Description = cartItem.Product.Description,
+                    //    Price = cartItem.Product.Price, 
+                    //    imgurl= cartItem.Product.imgurl,
+                    //    CategoryID = cartItem.Product.CategoryID,
+                    //};
+                    //productRepository.Update(Product);
                     order.OrderItems.Add(orderItem); // Add to in-memory list
                 }
 
                 // Add the new order to the database and save changes
                  orderRepository.Add(order);
-                orderRepository.commit(); // Save to generate OrderId
+                orderRepository.commit();
+                // Save to generate OrderId
+
+                productRepository.commit();// Save to generate OrderId
 
                 // Clear the shopping cart after the order is created
                 _shoppingCartRepository.Deleterange(cartItemsDb);

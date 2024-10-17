@@ -6,57 +6,114 @@
 }
 
 <div class="container mt-5">
-    @foreach(var item in Model)
+    @foreach (var item in Model)
+
     {
-         <div class="card shadow-lg">
-        <div class="row g-0">
-            <!-- Product Image -->
-            <div class="col-md-4">
-                <img src="~/images/Products/@item.imgurl" class="img-fluid rounded-start" alt="@item.ProductName">
-            </div>
+        <div class="card shadow-lg">
+            <div class="row g-0">
+                <!-- Product Image -->
+                <div class="col-md-4">
+                    <img src="~/images/Products/@item.imgurl" class="img-fluid rounded-start" alt="@item.ProductName">
+                </div>
 
-            <!-- Product Details -->
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h3 class="card-title text-danger">@item.ProductName</h3>
-                    <hr>
+                <!-- Product Details -->
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title text-danger">@item.ProductName</h3>
+                        <hr>
 
-                    <!-- Product Description -->
-                    <p class="card-text">
-                        <strong>Description:</strong> @item.Description
-                    </p>
+                        <!-- Product Description -->
+                        <p class="card-text">
+                            <strong>Description:</strong> @item.Description
+                        </p>
 
-                    <!-- Product Category -->
-                    <p class="card-text">
-                        <strong>Category:</strong> @item.Category.CategoryName
-                    </p>
+                        <!-- Product Category -->
+                        <p class="card-text">
+                            <strong>Category:</strong> @item.Category.CategoryName
+                        </p>
 
-                    <!-- Product Quantity -->
-                    <p class="card-text">
-                        <strong>Qty:</strong> @item.Qty
-                    </p>
+                        <!-- Product Quantity -->
+                        <p class="card-text">
+                            <strong>Qty:</strong> @item.Qty
+                        </p>
 
-                    <!-- Product Price -->
-                    <h4 class="card-text">
-                        <strong>Price:</strong> $@item.Price
-                    </h4>
+                        <!-- Product Price -->
+                        <h4 class="card-text">
+                            <strong>Price:</strong>EGP @item.Price
+                        </h4>
 
-                    <!-- Action Buttons -->
 
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-end mt-4">
+                            <!-- Edit Button -->
+                            <a href="/Admin/Product/Edit/@item.ProductId" class="btn btn-primary">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+
+                            <!-- Delete Button -->
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.ProductId" data-name="@item.ProductName">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     }
-    
-</div>   
 
+</div>
+
+
+
+
+<!-- Bootstrap Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong id="productName"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteForm" method="post" asp-area="Admin" asp-controller="Product" asp-action="Delete">
+                    <input type="hidden" name="id" id="deleteProductId" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+        // Trigger delete modal and pass data
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget; // Button that triggered the modal
+            const productId = button.getAttribute('data-id'); // Extract product id
+            const productName = button.getAttribute('data-name'); // Extract product name
+
+            // Update modal content with product data
+            const modalBodyName = deleteModal.querySelector('#productName');
+            modalBodyName.textContent = productName;
+    // Set the form's hidden input value to productId
+            const deleteForm = deleteModal.querySelector('#deleteForm');
+            const deleteProductId = deleteForm.querySelector('#deleteProductId');
+            deleteProductId.value = productId;
+        });
+</script>
 <!-- Styling for better visual appeal -->
 <style>
     .card {
         border-radius: 15px;
-        margin-bottom:20px;
+        margin-bottom: 20px;
     }
 
     .card-body {
@@ -73,4 +130,7 @@
         height: 100%;
     }
 
+    a {
+        margin-right: 5px;
+    }
 </style>

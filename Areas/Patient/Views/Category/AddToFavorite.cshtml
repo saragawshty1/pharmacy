@@ -1,0 +1,140 @@
+﻿<style>
+    .card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        padding: 15px;
+        display: flex; /* Horizontal alignment */
+        align-items: center;
+        justify-content: space-between; /* Space between items */
+        width: 100%;
+    }
+
+        /* Image container with fixed width */
+        .card img {
+            width: 150px; /* Fixed width */
+            height: 150px; /* Fixed height */
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px; /* Spacing between image and details */
+        }
+
+    .product-info {
+        flex-grow: 1; /* Take up remaining space */
+        padding: 0 20px; /* Spacing between details and buttons */
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .product-description {
+        font-size: 14px;
+        color: #777;
+        margin-top: 5px;
+    }
+
+    .product-price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        margin-top: 5px;
+    }
+
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+    }
+
+        .quantity-controls button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+        }
+
+        .quantity-controls input {
+            width: 50px;
+            text-align: center;
+            margin: 0 5px;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+    .button-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .add-to-favorite-btn {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+        .add-to-favorite-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: red;
+        }
+
+        .add-to-favorite-btn:hover {
+            background-color: #f8d7da;
+        }
+</style>
+
+<div class="container min-vh-100">
+    <h4 class="mb-4">MY FAVORITES</h4>
+    <div class="row">
+       
+
+        @foreach (var item in Model)
+        {
+            <div class="col-12">
+                <div class="card">
+                    <!-- Button container -->
+                    <div class="button-container">
+                        <!-- Add to favorite -->
+                        <a href="#" class="add-to-favorite-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+                            </svg>
+                        </a>
+
+                        <!-- Remove button -->
+                        <a href="/Patient/Category/RemoveFromFav/@item.Id" class="add-to-favorite-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Product image -->
+                    <img src="~/Images/Products/@item.products.imgurl" alt="@item.products.ProductName" class="img-fluid">
+
+                    <!-- Product details -->
+                    <div class="product-info">
+                        <h5 class="card-title">@item.products.ProductName</h5>
+                        <p class="product-description">Desc: @item.products.Description</p>
+                        <p class="product-price">EGP @item.products.Price</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section ShowFooter {
+    <footer class="footer mt-auto py-3">
+        <!-- Footer content here -->
+    </footer>
+}

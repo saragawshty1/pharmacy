@@ -70,6 +70,28 @@
                         </div>
                     </div>
                 </div>
+
+
+                @*count Stock*@
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-shop text-danger"></i> In Stock Products</h5>
+                            <p class="card-text">@ViewBag.InStockProduct</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-shop-window text-danger"></i> Out Of Stock Products</h5>
+                            <p class="card-text">@ViewBag.OutStockProduct</p>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
             <!-- Product Table -->

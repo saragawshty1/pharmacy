@@ -8,10 +8,10 @@ body {
     font-weight: bold;
 }
 
-.title {
+/*.title {
     margin-bottom: 5vh;
 }
-
+*/
 .card {
     /*margin: auto;*/
     max-width: 950px;
@@ -29,14 +29,14 @@ body {
 
 .cart {
     background-color: #fff;
-    padding: 4vh 5vh;
+    padding: 3vh 4vh;
     border-bottom-left-radius: 1rem;
     border-top-left-radius: 1rem;
 }
 
 @media(max-width:767px) {
     .cart {
-        padding: 4vh;
+        padding: 2vh;
         border-bottom-left-radius: unset;
         border-top-right-radius: 1rem;
     }
@@ -44,9 +44,9 @@ body {
 
 .summary {
     background-color: #ddd;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    padding: 4vh;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    padding: 5vh;
     color: rgb(65, 65, 65);
 }
 
@@ -65,9 +65,9 @@ body {
     padding: 0;
 }
 
-.row {
+/*.row {
     margin: 0;
-}
+}*/
 
 /*/*/*.title b {
     font-size: 1.5rem;
@@ -160,6 +160,7 @@ input {
     }
 
 a {
+    padding: 0 1vh;
     color: black;
 }
 

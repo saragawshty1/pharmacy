@@ -97,27 +97,111 @@
     .product-card.on-sale .sale-label {
         display: block;
     }
+
+    .add-to-favorite-btn {
+        position: absolute; /* Ensure it can be placed relative to the product card */
+        top: 10px; /* Adjust the vertical position */
+        right: 10px; /* Align to the right */
+        padding: 5px;
+        border-radius: 50%; /* Make the button circular */
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+        .add-to-favorite-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: red; /* Heart color */
+        }
+
+        .add-to-favorite-btn:hover {
+            background-color: #f8d7da; /* Light red background on hover */
+        }
 </style>
+@if (TempData["Erorr"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Erorr"]
+    </div>
+}
+@if (TempData["sucess"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["sucess"]
+    </div>
+}
 
 <div class="product-container">
+    
     @foreach (var product in Model)
     {
         <div class="product-card">
-            <a href="/Patient/Category/Details/@product.ProductId">
+            @if (product.Qty == 0)
+
+            {
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <!-- Add to Favorite Button -->
+                <a href="@Url.Action("AddToFavorite", "Category", new { ProductId = product.ProductId })" class="add-to-favorite-btn btn btn-outline-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 3.314C12.438-1.248 23.534 6.73 8 15-7.534 6.73 3.562-1.248 8 3.314z" />
+                    </svg>
+                   
+                </a>
+                }
+                <a href="/Patient/Category/Details/@product.ProductId">
                 <img src="~/Images/Products/@product.imgurl" class="product-image" alt="@product.ProductName" />
             </a>
             <div class="product-info">
                 <h3 class="product-title">@product.ProductName</h3>
                 <p class="product-price">EGP @product.Price</p>
-                <a asp-area="Patient" asp-action="Index" asp-controller="ShoppingCart" asp-route-ProductId="@product.ProductId" class="add-to-bag-btn" style="text-decoration: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
-                        <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                    <a href="@Url.Action("Index", "ShoppingCart", new { ProductId = product.ProductId })" class="add-to-bag-btn btn btn-secondary disabled" @(product.Qty <= 0 ? "onclick='return false;'" : "")>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                        </svg>
+                        ADD TO BAG
+                    </a>
+                   
+                </div>
+        
+                @* Optionally show sale label *@
+            }
+            else
+            {
+                @if (User.Identity.IsAuthenticated)
+                {
+                <!-- Add to Favorite Button -->
+                    <a href="@Url.Action("AddToFavorite", "Category", new { ProductId = product.ProductId ,CategoryId= product.CategoryID})" class="add-to-favorite-btn btn btn-outline-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 3.314C12.438-1.248 23.534 6.73 8 15-7.534 6.73 3.562-1.248 8 3.314z" />
                     </svg>
-                    Add to Bag
                 </a>
-            </div>
-            @* Optionally show sale label *@
-           
+                }
+                <a href="/Patient/Category/Details/@product.ProductId">
+                    <img src="~/Images/Products/@product.imgurl" class="product-image" alt="@product.ProductName" />
+                </a>
+                <div class="product-info">
+                    <h3 class="product-title">@product.ProductName</h3>
+                    <p class="product-price">EGP @product.Price</p>
+                    <a asp-area="Patient" asp-action="Index" asp-controller="ShoppingCart" asp-route-ProductId="@product.ProductId" class="add-to-bag-btn" style="text-decoration: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                        </svg>
+                        Add to Bag
+                    </a>
+                   
+                </div>
+            }
         </div>
     }
 </div>
+@section ShowFooter {
+    <footer class="footer mt-auto py-3">
+        <!-- Footer content here -->
+    </footer>
+}

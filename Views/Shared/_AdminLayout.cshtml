@@ -157,10 +157,18 @@
                         </li>
                         <li class="nav-item mb-2">
                             <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Order" && ViewContext.RouteData.Values["action"].ToString() == "Manage" ? "active" : "")"
-                               href="#">
+                               asp-area="Admin" asp-controller="ManageOrder" asp-action="GetAll">
                                 <i class="fas fa-tasks"></i> Manage Orders
                             </a>
                         </li>
+
+                        <li class="nav-item mb-2">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Product" && ViewContext.RouteData.Values["action"].ToString() == "ManageInventory" ? "active" : "")"
+                               asp-area="Admin" asp-controller="DashboardHome" asp-action="ManageInventory">
+                                <i class="bi bi-shop"></i>  Manage Inventory
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             </nav>

@@ -37,6 +37,7 @@ namespace pharmacy
                 .AddEntityFrameworkStores<ApplicationDBContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
+            
 
 
             // Register repositories
@@ -50,6 +51,9 @@ namespace pharmacy
             builder.Services.AddScoped<IPatientRepository, PatientRepository>();
             builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
             builder.Services.AddScoped<IPostRepository, PostRepository>();
+            builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+            builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+            builder.Services.AddScoped<EmailService>();
 
             var app = builder.Build();
 
